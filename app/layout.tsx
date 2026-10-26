@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
 import BackToTop from "@/components/BackToTop";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Clean system font stack, no webfont download: San Francisco on
+// Apple devices, Inter where installed, then Segoe UI / Helvetica /
+// Arial. See globals.css @theme for the same stack.
+
 
 export const metadata: Metadata = {
   title: "Abhishek Kumar Gautam — Full-Stack Developer",
@@ -22,25 +23,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-black text-zinc-100">
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col bg-[#fbfbfd] text-[#1d1d1f]">
         <div aria-hidden="true" className="animated-background" />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-500 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[#1d1d1f] focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to main content
         </a>
         <SiteHeader />
         <main id="main" className="relative z-[1] flex-1">{children}</main>
-        <footer className="relative z-[1] border-t border-zinc-800">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-8 text-sm text-zinc-400 sm:px-6">
-            <p>© 2026 {profile.name}. All rights reserved.</p>
-            <div className="flex gap-4">
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub</a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a>
-              <a href={`mailto:${profile.email}`} className="hover:text-white">Email</a>
+        <footer className="relative z-[1] border-t border-black/10">
+          <div className="mx-auto max-w-5xl px-4 py-10 text-center sm:px-6">
+            <div className="flex items-center justify-center gap-6 text-sm">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="text-[#6e6e73] transition-colors duration-200 hover:text-[#1d1d1f]">GitHub</a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#6e6e73] transition-colors duration-200 hover:text-[#1d1d1f]">LinkedIn</a>
+              <a href={`mailto:${profile.email}`} className="text-[#6e6e73] transition-colors duration-200 hover:text-[#1d1d1f]">Email</a>
             </div>
+            <p className="mt-4 text-sm text-[#6e6e73]">© 2026 {profile.name}. All rights reserved.</p>
           </div>
         </footer>
         <BackToTop />

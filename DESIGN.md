@@ -303,3 +303,34 @@ PRD-level reason):
 
 New sections go after Projects and before Achievements only if they
 are PRD sections; marketing or decorative sections do not belong here.
+
+
+## Light Apple-style redesign (2026-10-26)
+
+- Page: #fbfbfd background, #1d1d1f text, #6e6e73 secondary,
+  black/10 borders, white cards (rounded-3xl, hover border-black/25).
+  No dark cards, no indigo. Strict monochrome except the mascot
+  poster, which keeps its own paper/ink/green artwork.
+- Header: fixed, floating (inset-x-3/top-3, sm:inset-x-6/top-4),
+  max-w-5xl, rounded-full, 1px black/10 border, rgba(251,251,253,
+  0.72) background, backdrop-filter blur(20px), centred nav
+  (grid 1fr/auto/1fr, px-4/py-2 links), black pill for the active
+  section, mobile drawer below the pill.
+- Type: system font stack (San Francisco / Inter / Segoe UI, no
+  webfont download); body line-height 1.75, letter-spacing 0.01em;
+  headings semibold, near-tight; sections max-w-5xl, py-24 /
+  sm:py-32, one responsive type scale.
+- Sections: About/Education/Certifications as minimal divider
+  rows; Skills and project stacks as text tags separated by
+  vertical dividers; Projects as a large-type minimalist grid
+  (featured full-width, others 2-column) with no imagery, because
+  no verified project screenshots exist.
+- Motion: scroll reveals via components/Reveal.tsx
+  (IntersectionObserver, 600ms, 12px rise, once, reduced-motion
+  static, no Framer Motion); all hovers 200ms and gentle.
+- Contact form: floating labels, thin black/20 borders turning
+  black on focus, white fields, black pill submit.
+- Footer: centred, simple text social links, copyright below.
+- Known trade-off: the fixed floating header can overlap the
+  mascot poster's top rule on small screens; the site name is
+  also in the header, so nothing is lost.

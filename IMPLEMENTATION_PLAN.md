@@ -374,3 +374,36 @@ No rebuild from scratch, no invented links, metrics, or achievements.
   queries them once on mount, instead of callback refs. Behaviour
   is unchanged (same transforms, same groups); lint and typecheck
   pass with no rule weakened.
+
+## Light Apple-style redesign (2026-10-26, local only, not pushed)
+
+- User gave a 20-point redesign list. Implemented locally, content
+  and links unchanged: floating fixed header (inset-x-3/top-3,
+  max-w-5xl, rounded-full, 1px black/10 border, rgba(251,251,253,
+  0.72) background, backdrop-blur 20px exactly), centred nav
+  (grid 1fr/auto/1fr, consistent px-4/py-2 links, black pill for
+  the active section), system font stack (San Francisco / Inter
+  / Segoe UI, no webfont download — Geist loading removed),
+  body line-height 1.75 + 0.01em letter spacing, light page
+  #fbfbfd with #1d1d1f text and #6e6e73 secondary, white cards
+  with black/10 borders (no dark cards, no indigo anywhere),
+  About/Education/Certifications as minimal divider rows, skills
+  and project stacks as text tags separated by vertical dividers,
+  sections py-24/sm:py-32 at max-w-5xl with one responsive type
+  scale, scroll reveals via a small IntersectionObserver
+  component (components/Reveal.tsx, 600ms, 12px rise, reduced-
+  motion static, no Framer Motion), floating-label contact fields
+  with thin borders, centred footer with simple text social links,
+  and 200ms gentle hovers throughout.
+- Item 12 (large, high-quality project imagery) is NOT done with
+  images: no project screenshots exist or are verified, so the
+  grid is typographic and large-type instead — no image was
+  invented or faked. If the user supplies real screenshots, they
+  can be added to the grid then.
+- Known trade-offs, stated plainly: the fixed floating header
+  can overlap the mascot poster's top rule on small screens
+  (the site name is also in the header itself); the mascot poster
+  keeps its own paper/ink/green artwork, so the page palette is
+  monochrome everywhere except the poster; footer "icons" are
+  centred text links, because no icon library is adopted in this
+  project (see ARCHITECTURE.md §1). No push, no deploy yet.
