@@ -330,3 +330,47 @@ No rebuild from scratch, no invented links, metrics, or achievements.
 - Still open: push this change to GitHub (needs separate approval);
   Vercel deploy + SMTP (still awaiting approval); 1/2 21st.dev
   retrievals remain for today.
+
+## Mascot poster hero (2026-10-26, local only, not pushed)
+
+- User sent an image and the full MascotPortfolioHero component
+  code and asked for the same UI with details changed to his resume.
+  The component was added at components/MascotPortfolioHero.tsx
+  (supplied structure, room, flower, gaze logic, and CSS kept; the
+  supplied Demo export was NOT included, as it imported a different
+  path). It replaces the previous dark Apple hero and the
+  HeroAccent component, which was deleted with this change.
+- Resume mapping (all grounded in lib/data.ts or the job-search
+  target, nothing invented): index "AG/01", discipline "Full-Stack
+  Development", tagline = profile.name, collection
+  ["Featured", "Projects"], reel ["Portfolio @ 2026", profile.role],
+  year "2026", initials "AG", badge "Hire me", line2 "Portfolio",
+  line3 "Developer", word "Work", verticalTag "Code", bracketed
+  "S", seekingLabel "Seeking*", seeking "Full-Stack / MERN",
+  href "#contact", services ["Web Development", "API
+  Integration", "Database Design", "UI Development"], greetings
+  ["Hi there!", "Let's build something real.", "Open to
+  full-stack roles.", "Thanks for stopping by!"]. Colours kept
+  from the poster: paper #ebebea, ink #111111, accent #5fb57a,
+  black beanie/shirt mascot. The full name is NOT in the poster
+  headline (it is initials only, as in the poster); it remains in
+  the header, footer, contact section, and page metadata.
+- Known limitations, stated plainly: Archivo Black is in the
+  component's font stack but is NOT loaded via next/font, so the
+  headline falls back to Arial Black on most systems; the hero is
+  light while the rest of the page stays dark (intentional poster
+  contrast, per the user's request); the #home anchor is now the
+  wrapper section around the poster, so header nav still works;
+  pointer gaze still moves under reduced-motion (CSS animations
+  off, idle/blink gated off) — see DESIGN.md. No new dependency.
+- Still open: push this change to GitHub (needs separate approval);
+  Vercel deploy + SMTP (still awaiting approval); a visual
+  screenshot check was not run — verification below is by build
+  and HTML content checks only.
+
+- Lint fix for the supplied mascot code (same change, no
+  lint-disable): its callback refs tripped react-hooks/refs, so the
+  layer groups now carry data-layer attributes and the effect
+  queries them once on mount, instead of callback refs. Behaviour
+  is unchanged (same transforms, same groups); lint and typecheck
+  pass with no rule weakened.

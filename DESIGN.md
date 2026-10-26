@@ -53,8 +53,17 @@ updating this table and every component that uses the old token.
 - Font: Geist Sans (`--font-geist-sans`) via `next/font/google`, with
   system-ui fallback; Geist Mono is loaded for the mono token but is not
   used for body copy.
-- Page title (h1, hero name): `text-5xl sm:text-7xl`, bold,
-  `tracking-tight`, centred in the hero.
+- Poster hero headline: Archivo Black stack (`"Archivo Black",
+  "Arial Black", …`) via the component's own CSS, uppercase,
+  tight leading — Archivo Black itself is NOT loaded by next/font
+  in this app, so browsers fall back to Arial Black where Archivo
+  Black is absent; that fallback is the poster look as shipped, not
+  a measured font match.
+- Page title (h1, hero name) in the old dark hero was `text-5xl
+  sm:text-7xl`, bold, `tracking-tight`, centred. That hero no
+  longer exists; the poster h1's accessible name is "2026 AG
+  Portfolio Developer Works" and the full name appears in the
+  header, footer, contact section, and page metadata.
 - Section headings (h2): `text-4xl sm:text-5xl`, bold, `tracking-tight`.
 - Project featured title: `text-3xl`; other project titles: `text-2xl`.
 - Card headings (h3): `text-xl` (leadership) / `text-2xl` (projects) /
@@ -93,10 +102,15 @@ updating this table and every component that uses the old token.
   name, pill desktop nav, Resume button, mobile drawer. See Navigation below.
 - `BackToTop` (`components/BackToTop.tsx`, client): fixed
   `bottom-6 right-6`, indigo, appears only after 600px of scroll.
-- `HeroAccent` (`components/HeroAccent.tsx`, client): hero-only
-  particle canvas + hairline grid lines, adapted from 21st.dev Hero
-  Minimalism (lyanchouss, id 6999, retrieved 2026-10-26). See
-  Interactions below for what was adopted and rejected.
+- `MascotPortfolioHero` (`components/MascotPortfolioHero.tsx`,
+  client, supplied by the owner 2026-10-26, details changed to the
+  resume): full-viewport light poster hero — one-point-perspective
+  grid room, huge display headline, green seeking pill, services
+  row, and an interactive SVG mascot (gaze parallax, blink, click
+  greetings). It replaces the previous dark Apple hero and the
+  HeroAccent component (deleted with this change). The rest of the
+  page stays dark; the poster is deliberately the light first
+  section. See Interactions below for the resume mapping.
 - Footer copyright year is the literal current year in the layout
   (2026). A dynamic `new Date()` year was tried and reverted: it
   breaks prerendering under cacheComponents and trips the
@@ -186,7 +200,20 @@ updating this table and every component that uses the old token.
   zinc-300 → white; nav pills gain `bg-white/5` (active: `bg-white/10`).
   All hovers are `transition-colors duration-200` (UI/UX Pro Max
   minimalism: 200–250ms). Nothing else animates on hover.
-- Hero accent (Hero Minimalism pattern, adapted, not vendored):
+- Poster hero interactions (supplied component, resume details):
+  pointer gaze parallax (features move further than the skull,
+  nose furthest, ears opposite), blink (150ms, occasional double
+  blink), idle look-around after 3.5s without pointer movement,
+  click on the character cycles greetings and triggers a happy
+  state (closed happy eyes, wider blush, tag wiggle) for 2.2s,
+  headline letters lift/rotate and turn green on hover, swash and
+  curl lines draw on mount, flower spins (22s) and scales on hover.
+  Reduced-motion CSS disables animations/transitions; the JS
+  gaze still follows the pointer (small, user-initiated) and the
+  idle animation and blink are gated off — that gap is stated
+  here, not hidden.
+- Hero accent (Hero Minimalism pattern, adapted, not vendored)
+  — REMOVED with the poster hero; HeroAccent.tsx was deleted:
   a canvas of small white particles rising and fading (density
   area/7000, `mix-blend-screen`, opacity 0.6, pointer-events none)
   plus 3 horizontal + 3 vertical hairlines drawing in on mount
@@ -249,9 +276,16 @@ Order on the single page, top to bottom (do not reorder without a
 PRD-level reason):
 
 1. Header (sticky, SiteHeader)
-2. Hero (`#home`): eyebrow (role + location), h1 name, PRD headline,
-   summary, Explore Projects / Download Resume / Contact Me, GitHub +
-   LinkedIn links
+2. Hero (`#home`): MascotPortfolioHero poster (light paper, full
+   viewport) — top rule (AG/01, Full-Stack Development, full name,
+   {Featured/Projects}, Portfolio @ 2026), headline "2026 AG
+   PORTFOLIO DEVELOPER WORKS" with Hire me badge, Seeking*
+   Full-Stack / MERN pill linking to #contact, services row, and
+   the interactive mascot. The old dark hero's summary, Explore
+   Projects / Download Resume / Contact Me buttons, and GitHub +
+   LinkedIn links are NOT in the poster; name and links remain in
+   the header, footer, and contact section, and Resume is in the
+   header.
 3. About (`#about`): intro, Education, Languages
 4. Technical Skills (`#skills`): grouped cards, no proficiency bars
 5. Featured Projects (`#projects`): bento layout — Music & Movies Show

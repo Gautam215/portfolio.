@@ -1,5 +1,5 @@
 import ContactForm from "@/components/ContactForm";
-import HeroAccent from "@/components/HeroAccent";
+import MascotPortfolioHero from "@/components/MascotPortfolioHero";
 import {
   profile, education, skillGroups, projects, certifications, leadership, languages,
 } from "@/lib/data";
@@ -25,29 +25,32 @@ export default function Home() {
   const [featured, ...otherProjects] = projects;
   return (
     <div>
-      {/* Hero: centred, Apple product-page style — large type, pill CTAs,
-          no decoration beyond the soft background gradient. */}
-      <section id="home" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-24 text-center sm:px-6 sm:py-32">
-        <HeroAccent />
-        <div className="relative">
-        <p className="text-sm font-medium uppercase tracking-widest text-indigo-400">
-          Full-Stack Developer · {profile.location}
-        </p>
-        <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-[0.95] tracking-tight sm:text-7xl">{profile.name}</h1>
-        <p className="mx-auto mt-6 max-w-3xl text-2xl font-medium tracking-tight text-zinc-300 sm:text-3xl">
-          Building Thoughtful Digital Experiences Through Code and Design.
-        </p>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">{profile.summary}</p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a href="#projects" className="rounded-full bg-indigo-500 px-7 py-3 font-medium text-white transition-colors duration-200 hover:bg-indigo-400">Explore Projects</a>
-          <a href="/Abhishek-Gautam-Resume.pdf" download className="rounded-full border border-zinc-700 px-7 py-3 font-medium transition-colors duration-200 hover:bg-zinc-900">Download Resume</a>
-          <a href="#contact" className="rounded-full border border-zinc-700 px-7 py-3 font-medium transition-colors duration-200 hover:bg-zinc-900">Contact Me</a>
-        </div>
-        <div className="mt-8 flex justify-center gap-6 text-sm">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline hover:text-white">{profile.githubLabel}</a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-zinc-300 underline hover:text-white">{profile.linkedinLabel}</a>
-        </div>
-        </div>
+      {/* Mascot poster hero (light paper, green accent) replaces the
+          previous dark Apple hero. The rest of the page stays dark;
+          the poster is the first, full-viewport section. Name, role,
+          and links remain in the header, footer, contact section, and
+          metadata, and the seeking pill links to #contact. */}
+      <section id="home">
+      <MascotPortfolioHero
+        index="AG/01"
+        discipline="Full-Stack Development"
+        tagline={profile.name}
+        collection={["Featured", "Projects"]}
+        reel={["Portfolio @ 2026", profile.role]}
+        year="2026"
+        initials="AG"
+        badge="Hire me"
+        line2="Portfolio"
+        line3="Developer"
+        word="Work"
+        verticalTag="Code"
+        bracketed="S"
+        seekingLabel="Seeking*"
+        seeking="Full-Stack / MERN"
+        href="#contact"
+        services={["Web Development", "API Integration", "Database Design", "UI Development"]}
+        greetings={["Hi there!", "Let's build something real.", "Open to full-stack roles.", "Thanks for stopping by!"]}
+      />
       </section>
 
       <section id="about" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
