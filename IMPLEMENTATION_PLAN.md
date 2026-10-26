@@ -267,3 +267,66 @@ No rebuild from scratch, no invented links, metrics, or achievements.
   was clearly justified and safe (none met that bar — see the final
   report); the round's deliverables are the five documents above plus
   the updated checklist and plan.
+
+## Apple-inspired UI redesign (2026-10-26, local only, not pushed)
+
+- User asked for an Apple-inspired redesign using the ui-ux-pro-max
+  skill and 21st.dev MCP for components. No new dependency was added
+  (Framer Motion / Lucide remain deliberately not adopted, per
+  AGENTS.md); the redesign is Tailwind classes on existing components.
+- UI/UX Pro Max: design-system pattern returned was FAQ/Documentation
+  Landing — off-topic for a portfolio, so it was NOT followed. Used
+  instead: Dark Mode (OLED) style, Minimalism & Swiss Style (clean,
+  spacious, high contrast, subtle 200–250ms hover, no unnecessary
+  shadows), and clean sans typography guidance. Geist Sans was kept
+  (SF-Pro-like, already loaded) rather than adding a Google font.
+- 21st.dev: get_usage checked first (free tier, 2/2 retrievals
+  remaining on 2026-10-26); search (free, metadata only) returned hero,
+  bento-grid, glass-navbar, and portfolio-card candidates. get_component
+  was NOT called — it is the paid/quota step and needs a specific
+  user-approved component; the redesign below is original code
+  inspired by the bento-grid pattern, not copied component code.
+- Changes: pure black page (#000000, #f5f5f7 text), centred hero
+  (h1 text-5xl sm:text-7xl), section headings text-4xl sm:text-5xl,
+  max-w-6xl, py-20/24 sections with whitespace separation (no
+  border-t rules), pill buttons (rounded-full, ~44px CTAs), cards
+  rounded-[28px] with 200ms border hover, pill active nav
+  (bg-white/10, no underline), frosted header bg-black/70
+  backdrop-blur-xl, form fields rounded-xl bg-black py-3 inside a
+  rounded-[28px] card, projects as a bento layout (featured
+  full-width, other two in a 2-column grid). Content, order, links,
+  and contact behaviour are unchanged. DESIGN.md updated in the same
+  change. Verified: tests 11/11, lint 0, typecheck 0, build 0
+  (metadataBase warning only), live prod checks home 200, health
+  ok/sqlite, contact 201/400/405; test data removed, server stopped.
+- Still open: (1) push this redesign to GitHub — NOT done, needs
+  owner approval for that exact push; (2) 21st.dev paid component
+  retrieval — needs the owner to pick specific components (see final
+  report); (3) Vercel deploy + SMTP — still awaiting approval.
+
+## Hero Minimalism retrieval and adaptation (2026-10-26, local only, not pushed)
+
+- User approved the specific component Hero Minimalism (21st.dev,
+  lyanchouss, id 6999) after the redesign report. get_usage was
+  re-checked first (2/2 remaining), then get_component was called
+  once. The connector's ALLOWED_TOOLS initially blocked it; it was
+  reviewed for this exact task (specific approval, quota checked,
+  read-only retrieval, code to be reviewed before use), temporarily
+  enabled, used once, then reverted to get_usage + search only.
+- Retrieval result: success, not locked. Quota after: 1/2 remaining,
+  resetting 2026-10-27. Component code 8,671 chars, demo code 124
+  chars (just an import), registry dependencies empty (no npm deps).
+  No framer-motion, lucide, fetch, or tracking in the code.
+- Reviewed and rejected: fixed full-screen root (would take over the
+  single page), its own header, Dali Agents brand link, alert CTA,
+  bottom "How it works" content, and the Hubot Sans font import from
+  fonts.cdnfonts.com. None of those were copied into the portfolio.
+- Adapted into components/HeroAccent.tsx (client, single-purpose):
+  particle field sized to the hero section (not the window) with
+  resize handling and rAF cleanup, plus hairline lines in
+  globals.css. Hero title line-height tightened to 0.95, matching the
+  retrieved type pattern. Content, links, header, and contact flow
+  unchanged. DESIGN.md updated in the same change.
+- Still open: push this change to GitHub (needs separate approval);
+  Vercel deploy + SMTP (still awaiting approval); 1/2 21st.dev
+  retrievals remain for today.

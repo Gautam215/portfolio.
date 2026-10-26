@@ -57,14 +57,14 @@ export default function SiteHeader() {
   }, [open ]);
 
   return (
-    <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+    <header className="sticky top-0 z-10 border-b border-zinc-800/80 bg-black/70 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <a href="#home" className="flex items-center gap-2 font-semibold" onClick={() => setOpen(false)}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500 text-sm font-bold">AG</span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-black">AG</span>
           <span className="hidden sm:inline">Abhishek Kumar Gautam</span>
           <span className="sm:hidden">AG</span>
         </a>
-        <nav aria-label="Primary" className="hidden flex-wrap gap-4 text-sm text-zinc-300 md:flex">
+        <nav aria-label="Primary" className="hidden flex-wrap gap-1 text-sm text-zinc-300 md:flex">
           {LINKS.map((l) => (
             <a
               key={l.id}
@@ -72,8 +72,8 @@ export default function SiteHeader() {
               aria-current={active === l.id ? "true" : undefined}
               className={
                 active === l.id
-                  ? "font-medium text-white underline decoration-indigo-400 underline-offset-4"
-                  : "hover:text-white"
+                  ? "rounded-full bg-white/10 px-3 py-2 font-medium text-white transition-colors duration-200"
+                  : "rounded-full px-3 py-2 transition-colors duration-200 hover:bg-white/5 hover:text-white"
               }
             >
               {l.label}
@@ -84,13 +84,13 @@ export default function SiteHeader() {
           <a
             href="/Abhishek-Gautam-Resume.pdf"
             download
-            className="hidden rounded-lg bg-zinc-800 px-3 py-1.5 text-sm hover:bg-zinc-700 sm:inline-block"
+            className="hidden rounded-full bg-zinc-800 px-4 py-2 text-sm hover:bg-zinc-700 sm:inline-block"
           >
             Resume
           </a>
           <button
             type="button"
-            className="rounded-lg bg-zinc-800 px-3 py-1.5 text-sm hover:bg-zinc-700 md:hidden"
+            className="rounded-full bg-zinc-800 px-4 py-2 text-sm hover:bg-zinc-700 md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-drawer"
@@ -115,8 +115,8 @@ export default function SiteHeader() {
                   aria-current={active === l.id ? "true" : undefined}
                   className={
                     active === l.id
-                      ? "block rounded-lg bg-zinc-900 px-3 py-2 font-medium text-white"
-                      : "block rounded-lg px-3 py-2 text-zinc-300 hover:bg-zinc-900 hover:text-white"
+                      ? "block rounded-full bg-zinc-900 px-4 py-3 font-medium text-white"
+                      : "block rounded-full px-4 py-3 text-zinc-300 hover:bg-zinc-900 hover:text-white"
                   }
                 >
                   {l.label}
@@ -127,7 +127,7 @@ export default function SiteHeader() {
               <a
                 href="/Abhishek-Gautam-Resume.pdf"
                 download
-                className="block rounded-lg bg-indigo-500 px-3 py-2 text-center font-medium text-white hover:bg-indigo-400"
+                className="block rounded-full bg-indigo-500 px-4 py-3 text-center font-medium text-white hover:bg-indigo-400"
               >
                 Download Resume
               </a>

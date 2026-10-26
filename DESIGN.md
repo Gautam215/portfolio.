@@ -9,9 +9,11 @@ does not describe features that do not exist.
 
 ## Visual direction and design principles
 
-- Dark premium theme only. Apple-inspired minimalism: deep black and
-  charcoal surfaces, restrained glassmorphism in the header only, subtle
-  borders, soft shadows, controlled gradients.
+- Dark premium theme only. Apple-inspired minimalism (redesign
+  2026-10-26): pure black page, large tight type, generous whitespace,
+  pill buttons, large-radius cards, frosted header, whitespace instead
+  of divider rules between sections. No new dependency was added for
+  this redesign; it is Tailwind classes on the existing components.
 - Professional, not flashy: no gaming-style glow, no decorative
   illustration, no custom cursor (PRD marks it optional; it was skipped
   for accessibility, as in the static site).
@@ -29,16 +31,16 @@ All colors are Tailwind zinc/indigo tokens, as used in the code:
 
 | Role | Token | Use |
 |---|---|---|
-| Page background | `zinc-950` (#09090b) | Body, header backdrop base |
+| Page background | black (#000000) | Body; header backdrop base is `black/70` |
+| Primary text | `#f5f5f7` (Apple light grey on black) via globals.css; `zinc-100` in Tailwind classes | Body and headings |
 | Card background | `zinc-900` | Project, skill, education, achievement cards |
-| Borders | `zinc-800` | Section dividers, card borders |
-| Card hover / button surface | `zinc-800` → `zinc-700` | Secondary buttons, drawer items |
+| Borders | `zinc-800` | Card borders, footer top border |
+| Card hover / button surface | `zinc-800` → `zinc-700` | Secondary buttons, drawer items, card border on hover |
 | Primary action | `indigo-500` → `indigo-400` on hover | Explore Projects, Live demo, back-to-top, drawer CTA |
-| Primary text | `zinc-100` | Headings, body |
 | Secondary text | `zinc-300` | Sub-headings, links, labels |
 | Tertiary text | `zinc-400` | Descriptions, dates, notes (raised from zinc-500 for contrast) |
 | Muted text | `zinc-500` | Only the "no links listed" note on link-free projects |
-| Accent text | `indigo-400` / `indigo-300` | Eyebrow line, email link, active nav underline |
+| Accent text | `indigo-400` / `indigo-300` | Eyebrow line, email link; active nav uses a `bg-white/10` pill, not an underline |
 | Success | `emerald-300` on `emerald-950`, `emerald-700` border | Contact success state |
 | Error | `red-300` on `red-950`, `red-700` border | Contact error state |
 | Focus | `#818cf8` (indigo-400) 2px outline, 2px offset | Global `:focus-visible` |
@@ -51,9 +53,10 @@ updating this table and every component that uses the old token.
 - Font: Geist Sans (`--font-geist-sans`) via `next/font/google`, with
   system-ui fallback; Geist Mono is loaded for the mono token but is not
   used for body copy.
-- Page title (h1, hero name): `text-4xl sm:text-6xl`, bold,
-  `tracking-tight`.
-- Section headings (h2): `text-3xl`, bold.
+- Page title (h1, hero name): `text-5xl sm:text-7xl`, bold,
+  `tracking-tight`, centred in the hero.
+- Section headings (h2): `text-4xl sm:text-5xl`, bold, `tracking-tight`.
+- Project featured title: `text-3xl`; other project titles: `text-2xl`.
 - Card headings (h3): `text-xl` (leadership) / `text-2xl` (projects) /
   default semibold (skills, engineering).
 - Body: default size, `leading-relaxed`, zinc-400 for secondary copy.
@@ -63,28 +66,37 @@ updating this table and every component that uses the old token.
 
 ## Spacing and layout system
 
-- Content width: `max-w-5xl`, centered (`mx-auto`), horizontal padding
-  `px-4`.
-- Section padding: `py-14` (content sections), hero `py-16 sm:py-24`.
-- Section separation: `border-t border-zinc-800` between sections.
-- Gaps: `gap-3` (buttons/links), `gap-4` (grids/cards),
+- Content width: `max-w-6xl`, centered (`mx-auto`), horizontal padding
+  `px-4 sm:px-6`.
+- Section padding: `py-20 sm:py-24` (content sections), hero
+  `py-24 sm:py-32`.
+- Section separation: whitespace only — no `border-t` rules between
+  sections (the footer keeps its top border).
+- Gaps: `gap-3` (buttons/links), `gap-6` (grids/cards),
   `gap-10` (contact two-column), `space-y-4` / `space-y-6` (stacks).
-- Cards: `rounded-xl`, `border border-zinc-800`, `bg-zinc-900`,
-  `p-4` (education) / `p-5` (skills, engineering) / `p-6` (projects,
-  leadership).
-- Chips: `rounded-full`, `border border-zinc-700`, `bg-zinc-900`,
-  `px-3 py-1`, `text-sm`, `text-zinc-200`.
-- Buttons: `rounded-lg`, `px-5 py-2.5` (primary actions),
-  `px-4 py-2` (project links), `px-3 py-1.5` (header Resume).
+- Cards: `rounded-[28px]`, `border border-zinc-800`, `bg-zinc-900`,
+  `p-6 sm:p-8`, hover `border-zinc-700` over 200ms. The shared `Card`
+  helper in `app/page.tsx` is the single card pattern; education and
+  leadership use the same radius/border/background directly.
+- Chips: `rounded-full`, `border border-zinc-700`, `bg-zinc-800`,
+  `px-4 py-1.5`, `text-sm`, `text-zinc-200`.
+- Buttons: `rounded-full` everywhere — `px-7 py-3` (hero CTAs),
+  `px-5 py-2.5` (project links), `px-6 py-3` (contact submit),
+  `px-4 py-2` (header Resume). Minimum touch height is ~44px for
+  primary CTAs and drawer links (`py-3`).
 - No arbitrary spacing values outside this system without justification.
 
 ## Reusable components
 
 - `SiteHeader` (`components/SiteHeader.tsx`, client): sticky header,
-  `bg-zinc-950/90 backdrop-blur`, logo mark "AG" + name, desktop nav,
-  Resume button, mobile drawer. See Navigation below.
+  `bg-black/70 backdrop-blur-xl`, white-on-black circular "AG" mark +
+  name, pill desktop nav, Resume button, mobile drawer. See Navigation below.
 - `BackToTop` (`components/BackToTop.tsx`, client): fixed
   `bottom-6 right-6`, indigo, appears only after 600px of scroll.
+- `HeroAccent` (`components/HeroAccent.tsx`, client): hero-only
+  particle canvas + hairline grid lines, adapted from 21st.dev Hero
+  Minimalism (lyanchouss, id 6999, retrieved 2026-10-26). See
+  Interactions below for what was adopted and rejected.
 - Footer copyright year is the literal current year in the layout
   (2026). A dynamic `new Date()` year was tried and reverted: it
   breaks prerendering under cacheComponents and trips the
@@ -110,7 +122,8 @@ updating this table and every component that uses the old token.
   `/Abhishek-Gautam-Resume.pdf`.
 - Active-section indicator: the nav link for the section nearest the
   top of the viewport gets `aria-current="true"`, white text, medium
-  weight, and an indigo underline. Implemented with
+  weight, and a `bg-white/10` pill background (no underline).
+  Implemented with
   IntersectionObserver (`rootMargin: "-40% 0px -55% 0px"`); the
   Engineering section is observed too, so scrolling through it does not
   leave a stale active link.
@@ -128,10 +141,11 @@ updating this table and every component that uses the old token.
   chars), Email (required, `type="email"`), Message (required, 10–2000
   chars, 5 rows). `autoComplete="name"` / `"email"`; labels are
   associated by `htmlFor`/`id`.
-- Field style: full width, `rounded-lg`, `border-zinc-700`,
-  `bg-zinc-900`, `px-3 py-2`, white text, zinc-500 placeholder,
-  indigo-400 border on focus.
-- Submit: indigo button, disabled with 50% opacity and label
+- Field style: full width, `rounded-xl`, `border-zinc-800`,
+  `bg-black`, `px-4 py-3`, white text, zinc-500 placeholder,
+  indigo-400 border on focus. The form sits in a `rounded-[28px]`
+  `bg-zinc-900` card so fields read as inset on the card.
+- Submit: indigo pill button (`rounded-full px-6 py-3`), disabled with 50% opacity and label
   "Sending…" while a request is in flight. Duplicate submits are
   therefore not possible from the button.
 - Success: emerald box, `role="status"`, with the server's message
@@ -163,19 +177,34 @@ updating this table and every component that uses the old token.
 ## Interactions and animations
 
 - Smooth scrolling (`scroll-behavior: smooth`) for anchor navigation.
-- Animated background: a fixed, non-interactive layer with two radial
-  indigo gradients at 8–9% opacity, drifting slowly
+- Animated background: a fixed, non-interactive layer with one radial
+  indigo gradient at 7% opacity at the top, drifting slowly
   (`background-drift`, 28s, alternate). It sits behind content
   (`z-0`; header, main, and footer are `relative z-[1]` / `z-10`).
 - Hover: primary buttons indigo-500 → indigo-400; secondary buttons
-  zinc-800 → zinc-700; links zinc-300 → white; project links follow
-  the same two patterns. Nothing else animates on hover.
+  zinc-800 → zinc-700; cards zinc-800 → zinc-700 border; links
+  zinc-300 → white; nav pills gain `bg-white/5` (active: `bg-white/10`).
+  All hovers are `transition-colors duration-200` (UI/UX Pro Max
+  minimalism: 200–250ms). Nothing else animates on hover.
+- Hero accent (Hero Minimalism pattern, adapted, not vendored):
+  a canvas of small white particles rising and fading (density
+  area/7000, `mix-blend-screen`, opacity 0.6, pointer-events none)
+  plus 3 horizontal + 3 vertical hairlines drawing in on mount
+  (800–900ms, cubic-bezier(.22,.61,.36,1), staggered 150–760ms,
+  one-pass shimmer), confined to the hero section. Rejected from
+  that component: its fixed full-screen root, its own header, the
+  Dali Agents brand/CTA/bottom content, and its Hubot Sans external
+  font import — none of those appear here, and no new dependency
+  was added (registry dependencies were empty).
 - No reveal-on-scroll animations, no custom cursor, no parallax. The
   static site had reveal classes; the full-stack app deliberately
   does not reintroduce them (they add motion without function).
 - Reduced motion: `prefers-reduced-motion: reduce` disables smooth
   scrolling and the background animation, and back-to-top scrolls
   instantly. The animated background is also fully static in that mode.
+  The hero accent follows the same rule: the particle canvas does
+  not animate and the hairlines render statically (the retrieved
+  component animated regardless — that was changed here).
 
 ## Responsive behavior
 
@@ -184,7 +213,7 @@ updating this table and every component that uses the old token.
 - Header: full name hidden below `sm` (shows "AG"); desktop nav
   hidden below `md` (drawer instead); Resume button hidden below
   `sm` in the header (present in the drawer and hero instead).
-- Hero heading: `text-4xl` → `sm:text-6xl`.
+- Hero heading: `text-5xl` → `sm:text-7xl`, centred.
 - Skill/engineering grids: 1 column → `sm:grid-cols-2` →
   `lg:grid-cols-3`.
 - Contact: 1 column → `md:grid-cols-2` (info + form).
@@ -225,8 +254,11 @@ PRD-level reason):
    LinkedIn links
 3. About (`#about`): intro, Education, Languages
 4. Technical Skills (`#skills`): grouped cards, no proficiency bars
-5. Featured Projects (`#projects`): Music & Movies Show first and
-   most prominent, then Campus Connect Portal, then Smart Chatbot
+5. Featured Projects (`#projects`): bento layout — Music & Movies Show
+   full-width first and most prominent, then Campus Connect Portal
+   and Smart Chatbot side by side in a 2-column grid (21st.dev
+   bento-grid metadata pattern; no screenshots exist, so cards are
+   text-only as before)
 6. Engineering Mindset (`#engineering`): six practice cards
 7. Achievements & Certifications (`#achievements`): leadership
    spotlight, then certification rows with dates

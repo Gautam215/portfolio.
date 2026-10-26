@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100">
+      <body className="min-h-full flex flex-col bg-black text-zinc-100">
         <div aria-hidden="true" className="animated-background" />
         <a
           href="#main"
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main" className="relative z-[1] flex-1">{children}</main>
         <footer className="relative z-[1] border-t border-zinc-800">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm text-zinc-400">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-8 text-sm text-zinc-400 sm:px-6">
             <p>© 2026 {profile.name}. All rights reserved.</p>
             <div className="flex gap-4">
               <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub</a>
