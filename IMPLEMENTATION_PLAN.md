@@ -407,3 +407,54 @@ No rebuild from scratch, no invented links, metrics, or achievements.
   monochrome everywhere except the poster; footer "icons" are
   centred text links, because no icon library is adopted in this
   project (see ARCHITECTURE.md §1). No push, no deploy yet.
+
+## Hallmark + Impeccable + UI-UX Pro Max + Apple, UI-only (2026-10-28, local only, not pushed)
+
+- User asked to apply hallmark, impeccable, ui-ux-pro-max and
+  Apple design to this portfolio, UI/UX only. Depth: restyle/
+  polish — layout, content, links, fields, handlers and ids all
+  kept; only the system and gate-named details changed. No new
+  dependency, no new section, no new image, no content added.
+- Hallmark floor applied: colours and fonts now go through
+  @theme tokens in globals.css (page, ink, secondary, surface,
+  border, border-strong, glow, system font stack); components use
+  bg-page/text-ink/text-secondary/bg-surface/border-border, no
+  literal hex in TSX; overflow-x: clip on html/body; headings
+  balanced with overflow-wrap; focus-visible instant; middle-dot
+  meta strings removed (education, project period/stack,
+  leadership date/org now separate lines; languages joined by
+  commas); floating label now animates transform + scale only
+  (never transition-all, never top/left); reveal hidden state
+  scoped under a .js class the component adds on mount, so
+  scripting-off content stays visible; Hallmark stamp + critique
+  + waivers are the first lines of globals.css; dead HeroAccent
+  CSS removed. sloplint (modern-minimal): floor tier clean,
+  full run 0 FAIL, 0 REFLEX, 1 WARN waived on record (footer
+  "All rights reserved" kept — owner's existing line, not added
+  here). An :active opacity state was added to satisfy reflex
+  26b.
+- Impeccable craft floor applied where it fits a light Apple
+  page: body measure capped at 70ch for main paragraphs,
+  ::selection themed from the palette, cursor-pointer on links
+  and buttons, one authored reveal moment (not one per section
+  with different timings), no card-in-card, no eyebrow, no
+  gradient text, no hard offset shadows. Impeccable launcher
+  note: its binary was not present (scripts/bin missing), so it
+  would have downloaded one — it was NOT run; project context
+  (DESIGN.md + page files) was read directly instead, and
+  craft-floor.md was read before any UI edit.
+- UI-UX Pro Max: design-system search returned Minimalism &
+  Swiss Style (already the page's style), subtle 200-250ms
+  hovers, contrast/focus/reduced-motion/responsive checklist —
+  followed. Its blue accent (#2563EB) and Archivo/Space Grotesk
+  pairing were NOT adopted: the user's pinned Apple monochrome
+  + system-font brief wins over a search suggestion.
+- Gate-named copy changes only (same facts, no new claims):
+  About em dash -> comma phrasing, Engineering intro em dash
+  -> colon, certification separator dash -> comma, contact
+  em dash -> full stop. Every other word, link, field and
+  handler is unchanged.
+- Still open: push this UI-only change (needs separate
+  approval); Vercel deploy + SMTP (still awaiting approval);
+  no screenshot visual check run — verification is build +
+  HTML + sloplint + live checks only.

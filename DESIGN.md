@@ -334,3 +334,25 @@ are PRD sections; marketing or decorative sections do not belong here.
 - Known trade-off: the fixed floating header can overlap the
   mascot poster's top rule on small screens; the site name is
   also in the header, so nothing is lost.
+
+
+## Hallmark + Impeccable + UI-UX Pro Max + Apple, UI-only (2026-10-28)
+
+- Depth restyle/polish: layout, content, links, fields and ids
+  kept. System: @theme tokens in globals.css (page, ink,
+  secondary, surface, border, border-strong, glow, system font
+  stack); components use token classes, no literal hex in TSX.
+  Hallmark stamp + critique + waivers are globals.css lines
+  1-3. sloplint modern-minimal: floor clean, full run 0 FAIL,
+  0 REFLEX, 1 WARN waived (footer "All rights reserved" kept).
+- Details: overflow-x clip, balanced headings, instant
+  focus-visible, :active opacity, ::selection from palette,
+  cursor-pointer on links/buttons, body measure 70ch, no
+  middle-dot meta strings, floating label via transform +
+  scale only, reveal hidden state under .js (scripting-off
+  visible), dead HeroAccent CSS removed.
+- Not adopted, with reasons: UI-UX Pro Max blue accent and
+  Archivo/Space Grotesk (pinned Apple monochrome + system font
+  wins); mascot poster kept as supplied artwork (its own
+  tokens, tracked capitals, dense poster text) — see waivers
+  in globals.css.

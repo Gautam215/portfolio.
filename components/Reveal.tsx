@@ -5,13 +5,17 @@ import { useEffect, useRef, useState } from "react";
 // Scroll reveal, no new dependency: a small IntersectionObserver
 // wrapper. Sections fade and rise 12px over 600ms, once, and only
 // when they enter the viewport. Under reduced-motion the CSS in
-// globals.css renders the content statically (no hidden state), and
-// if IntersectionObserver is unavailable the content is shown.
+// globals.css renders the content statically, and if
+// IntersectionObserver is unavailable the content is shown.
+// Scripting-off safety: the hidden state lives under a .js class
+// (see globals.css), added here on mount — with scripting off
+// there is no .js class, so server-rendered content stays visible.
 export default function Reveal({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    document.documentElement.classList.add("js");
     const el = ref.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
